@@ -11,3 +11,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.dropdown-item:focus {
+  background-color: transparent;
+  outline: none;
+}
