@@ -14,13 +14,13 @@ function App() {
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/manufacturer/">
-            {/* <Route path="" element={<ManufacturerList />} />
-            <Route path="create" element={<ManufacturerForm />} /> */}
+            <Route path="" element={<ManufacturerList />} />
+            <Route path="create" element={<ManufacturerForm />} />
           </Route>
-           {/* <Route path="/vehicle-model/"> */}
-            {/* <Route path="" element={<VehicleModelList />} /> */}
-            {/* <Route path="create" element={<VehicleModelForm />} />
-          </Route> */}
+          <Route path="/vehicle-model/">
+            <Route path="" element={<VehicleModelList />} />
+            <Route path="create" element={<VehicleModelForm />} />
+          </Route>
           {/* {/* <Route path="/automobile/">
             <Route path="" element={<AutomobileList />} />
             <Route path="create" element={<AutomobileForm />} />
