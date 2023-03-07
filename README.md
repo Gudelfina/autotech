@@ -2,7 +2,7 @@
 
 Team:
 
-* Gudelfina Mendez  - services
+* Person 1 - Which microservice?
 * Person 2 - Which microservice?
 
 ## Design
