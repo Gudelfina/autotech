@@ -2,8 +2,8 @@
 
 Team:
 
-* Person 1 - Which microservice?
-* Person 2 - Which microservice?
+* Lupe Mendez - services
+* Noah Granard- sales
 
 ## Design
 
