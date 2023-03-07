@@ -31,7 +31,7 @@ function AutomobileList(){
             <div className="col-sm">
                 <div className="offset-3 col-6">
                         <div className="card-body">
-                        <h1>Vehicle Models</h1>
+                        <h1>Vehicles in Inventory</h1>
                             <table className="table table-striped">
                             <thead>
                                 <tr>
@@ -60,7 +60,7 @@ function AutomobileList(){
                             </tbody>
                             </table>
                             <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                                <Link to="/automobile/create" className="btn btn-primary btn-lg px-4 gap-3">Add a New Vehicle</Link>
+                                <Link to="/automobile/create" className="btn btn-primary btn-lg px-4 gap-3">Create New Vehicle</Link>
                             </div>
                         </div>
                         <div className="col-sm">

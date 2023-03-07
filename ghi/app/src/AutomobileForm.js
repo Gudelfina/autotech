@@ -74,7 +74,7 @@ function AutomobileForm() {
                     <div className="shadow p-4 mt-4">
                         <div className="card shadow">
                             <div className="card-body">
-                                <h1 className="card-title">Add a New Automobile to Inventory</h1>
+                                <h1 className="card-title">Create New Automobile Inventory</h1>
                                 <form onSubmit={handleSubmit} id="create-automobile-inventory-form">
                                     <p className="mb-3">
                                         Please enter the details of the vehicle you would like to add to the inventory.
