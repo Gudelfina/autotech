@@ -1,10 +1,8 @@
 # CarCar
 
 Team:
-
-* Person 1 - Which microservice?
-* Person 2 - Which microservice?
-
+Person 1 - Which microservice?
+Noah Granard - Sales microservice
 ## Design
 
 ## Service microservice
