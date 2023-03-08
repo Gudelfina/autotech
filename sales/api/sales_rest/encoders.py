@@ -4,11 +4,8 @@ from .models import AutomobileVO, SalesPerson, Customer, SaleRecord
 class AutomobileVOEncoder(ModelEncoder):
     model = AutomobileVO
     properties = [
-        "import_href",
-        # "color",
-        # "year",
         "vin",
-        "sold",
+        # "import_href",
         "id",
     ]
 
@@ -33,14 +30,13 @@ class CustomerEncoder(ModelEncoder):
 class SaleRecordListEncoder(ModelEncoder):
     model = SaleRecord
     properties = [
-        "automobile",
         "sales_person",
         "customer",
         "sale_price",
         "id"
     ]
     encoders = {
-        "automobile": AutomobileVOEncoder(),
+        # "automobile": AutomobileVOEncoder(),
         "sales_person": SalesPersonEncoder(),
         "customer": CustomerEncoder(),
     }
