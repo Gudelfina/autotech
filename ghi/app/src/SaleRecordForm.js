@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
 function SaleRecordForm() {
-    const [auto, setAuto] = useState('');
-    const [autos, setAutos] = useState([]);
+    const [automobile, setAutomobile] = useState('');
+    const [automobiles, setAutomobiles] = useState([]);
     const [sales_person, setSales_person] = useState('');
     const [sales_persons, setSales_persons] = useState([]);
     const [customer, setCustomer] = useState('');
@@ -42,12 +42,12 @@ function SaleRecordForm() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const data = {}
-        data.auto = auto;
+        data.automobile = automobile;
         data.sales_person = sales_person;
         data.customer = customer;
         data.sale_price = sale_price;
-
         const url = 'http://localhost:8090/api/sale-record/';
+        console.log(data.auto)
         const fetchOptions = {
             method: 'POST',
             headers: {
@@ -58,7 +58,7 @@ function SaleRecordForm() {
 
         const saleRecordResponse = await fetch(url, fetchOptions);
         if (saleRecordResponse.ok) {
-            setAuto('');
+            setAutomobile('');
             setSales_person('');
             setCustomer('');
             setSale_price('');
@@ -67,7 +67,7 @@ function SaleRecordForm() {
 
     const handleChangeAuto = (event) => {
         const value = event.target.value;
-        setAuto(value);
+        setAutomobile(value);
     }
 
     const handleChangeSales_person = (event) => {
@@ -88,7 +88,7 @@ function SaleRecordForm() {
     useEffect(() => {
         fetch('http://localhost:8100/api/automobiles/')
             .then(res => res.json())
-            .then(res => setAutos(res.autos))
+            .then(res => setAutomobiles(res.autos))
         fetch("http://localhost:8090/api/sales-person/")
             .then(res => res.json())
             .then(res => setSales_persons(res.sales_person))
@@ -110,12 +110,12 @@ function SaleRecordForm() {
                                     Please fill out the form below to create a new sale record.
                                 </p>
                                 <div className="form-floating mb-3">
-                                    <select onChange={handleChangeAuto}  placeholder="automobile" required type="text" className="form-select" name ="auto" id="auto" value={auto} >
+                                    <select onChange={handleChangeAuto} placeholder="automobile" required type="text" className="form-select" name ="automobile" id="automobile" value={automobile} >
                                     <option value="">Choose Automobile by VIN</option>
-                                    {autos?.map(auto => {
+                                    {automobiles.filter(automobile=>!automobile.sold)?.map(automobile => {
                                         return (
-                                            <option key={auto.id} value={auto.id}>
-                                                {auto.vin}
+                                            <option key={automobile.id} value={automobile.vin}>
+                                                {automobile.vin}
                                             </option>
                                         )
                                     })}

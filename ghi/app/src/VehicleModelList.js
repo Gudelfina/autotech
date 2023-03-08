@@ -16,7 +16,7 @@ function VehicleModelList() {
 
     useEffect(() => {
         fetchData();
-    });
+    }, []);
 
     const handleDelete = async (id) => {
         const url = `http://localhost:8100/api/models/${id}/`;

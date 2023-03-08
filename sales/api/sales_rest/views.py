@@ -75,6 +75,12 @@ def api_sale_record_list(request):
             "automobile": AutomobileVO.objects.get(vin=content["automobile"]),
             "customer": Customer.objects.get(pk=content["customer"]),
         }
+
+        sold_status = content["automobile"].sold
+        if sold_status == False:
+            content["automobile"].sold = True
+            content["automobile"].save()
+
         sale_record = SaleRecord.objects.create(**content)
         return JsonResponse(
                 {"sale_record": sale_record},
@@ -82,11 +88,15 @@ def api_sale_record_list(request):
                 safe=False,
             )
         # except:
-            # response = JsonResponse(
-            #     {"message": "Sales Record cannot be created"}
-            # )
-            # response.status_code = 400
-            # return response
+        #     response = JsonResponse(
+        #         {"message": "Sales Record cannot be created"}
+        #     )
+        #     response.status_code = 400
+        #     return response
+
+
+
+
 
 
 @require_http_methods(["GET"])
