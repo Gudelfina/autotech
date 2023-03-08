@@ -1,11 +1,15 @@
 from common.json import ModelEncoder
-from .models import VinVO, SalesPerson, PotentialCustomer, SaleRecord
+from .models import AutomobileVO, SalesPerson, Customer, SaleRecord
 
-class VinVOEncoder(ModelEncoder):
-    model = VinVO
+class AutomobileVOEncoder(ModelEncoder):
+    model = AutomobileVO
     properties = [
-        "vin",
         "import_href",
+        # "color",
+        # "year",
+        "vin",
+        "sold",
+        "id",
     ]
 
 class SalesPersonEncoder(ModelEncoder):
@@ -13,27 +17,35 @@ class SalesPersonEncoder(ModelEncoder):
     properties = [
         "name",
         "employee_number",
+        "id"
     ]
 
 
-class PotentialCustomerEncoder(ModelEncoder):
-    model = PotentialCustomer
+class CustomerEncoder(ModelEncoder):
+    model = Customer
     properties = [
         "name",
         "address",
         "phone_number",
+        "id"
     ]
 
-class SaleRecordEncoder(ModelEncoder):
+class SaleRecordListEncoder(ModelEncoder):
     model = SaleRecord
     properties = [
         "automobile",
-        "salesperson",
-        "potential_customer",
+        "sales_person",
+        "customer",
         "sale_price",
+        "id"
     ]
     encoders = {
-        "vin": VinVOEncoder(),
-        "salesperson": SalesPersonEncoder(),
-        "potential_customer": PotentialCustomerEncoder(),
+        "automobile": AutomobileVOEncoder(),
+        "sales_person": SalesPersonEncoder(),
+        "customer": CustomerEncoder(),
     }
+
+    def get_extra_data(self, o):
+        return {
+            "vin": o.automobile.vin,
+        }
