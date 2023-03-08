@@ -4,10 +4,10 @@ from django.urls import reverse
 
 class AutomobileVO(models.Model):
     vin = models.CharField(max_length=17, unique=True)
-    import_href = models.CharField(max_length=100)
+    # import_href = models.CharField(max_length=100)
     # color = models.CharField(max_length=100)
     # year = models.IntegerField()
-    # sold = models.BooleanField(default=False)
+    sold = models.BooleanField(default=False)
 
     # def __str__(self):
     #     return f"{self.vin}"
@@ -49,4 +49,4 @@ class SaleRecord(models.Model):
         on_delete=models.CASCADE
         )
 
-    sale_price = models.IntegerField()
+    sale_price = models.CharField(max_length=200)

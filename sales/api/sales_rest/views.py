@@ -67,26 +67,26 @@ def api_sale_record_list(request):
             safe=False,
         )
     else:
-        try:
-            content = json.loads(request.body)
-            content = {
-                **content,
-                "sales_person": SalesPerson.objects.get(pk=content["sales_person"]),
-                "automobile": AutomobileVO.objects.get(vin=content["automobile"]),
-                "customer": Customer.objects.get(pk=content["customer"]),
-            }
-            sale_record = SaleRecord.objects.create(**content)
-            return JsonResponse(
+        # try:
+        content = json.loads(request.body)
+        content = {
+            **content,
+            "sales_person": SalesPerson.objects.get(pk=content["sales_person"]),
+            "automobile": AutomobileVO.objects.get(vin=content["automobile"]),
+            "customer": Customer.objects.get(pk=content["customer"]),
+        }
+        sale_record = SaleRecord.objects.create(**content)
+        return JsonResponse(
                 {"sale_record": sale_record},
                 encoder=SaleRecordListEncoder,
                 safe=False,
             )
-        except:
-            response = JsonResponse(
-                {"message": "Sales Record cannot be created"}
-            )
-            response.status_code = 400
-            return response
+        # except:
+            # response = JsonResponse(
+            #     {"message": "Sales Record cannot be created"}
+            # )
+            # response.status_code = 400
+            # return response
 
 
 @require_http_methods(["GET"])

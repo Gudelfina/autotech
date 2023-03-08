@@ -17,13 +17,16 @@ function Nav() {
   }
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-success">
-      <div className="container-fluid">
+    <>
+    <nav className=" display-flex navbar navbar-expand-lg navbar-dark bg-success">
+    <div>
         <NavLink className="navbar-brand" to="/">CarCar</NavLink>
-        <button className="navbar-toggler" type="button" onClick={handleMouseEnter}>
+    </div>
+      <div className="container-fluid justify-content-space-between ">
+        {/* <button className="navbar-toggler" type="button" onClick={handleMouseEnter}>
           <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className={`navbar-nav ${isOpen ? 'open' : ''}`} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+        </button> */}
+        <div className={`navcenter navbar-nav ${isOpen ? 'open' : ''}`} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
           <div className="dropdown">
             <NavLink className="nav-link dropdown-toggle" to="#" id="manufacturerDropdown" role="button" data-bs-toggle="dropdown" aria-expanded={isOpen}>
               Manufacturer
@@ -50,10 +53,20 @@ function Nav() {
               <li><NavLink className="dropdown-item" to="/automobile" onClick={handleClick}>List Automobile Inventory</NavLink></li>
               <li><NavLink className="dropdown-item" to="/automobile/create" onClick={handleClick}>Create Automobile Inventory</NavLink></li>
             </ul>
+            <div className="dropdown">
+              <NavLink className="nav-link dropdown-toggle" to="#" id="saleRecordDropdown" role="button" data-bs-toggle="dropdown" aria-expanded={isOpen}>
+                Sale Record
+              </NavLink>
+              <ul className="dropdown-menu" aria-labelledby="saleRecordDropdown">
+                <li><NavLink className="dropdown-item" to="/sale-record" onClick={handleClick}>List Sale Record</NavLink></li>
+                <li><NavLink className="dropdown-item" to="/sale-record/create" onClick={handleClick}>Create Sale Record</NavLink></li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
     </nav>
+    </>
   )
 }
 
