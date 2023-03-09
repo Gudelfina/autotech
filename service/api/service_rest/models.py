@@ -21,8 +21,8 @@ class Technician(models.Model):
 
 class Appointment(models.Model):
     owner_name = models.CharField(max_length=200)
-    date = models.DateField(auto_now_add=True)
-    time = models.DateField(auto_now_add=True)
+    date = models.DateField()
+    time = models.TimeField()
     reason = models.TextField(max_length=300)
 
     vin = models.ForeignKey(

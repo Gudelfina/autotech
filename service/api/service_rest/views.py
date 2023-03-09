@@ -29,6 +29,7 @@ class AppointmentListEncoder(ModelEncoder):
         "date",
         "time",
         "reason",
+        "id",
         "vin",
         "technician"
     ]
@@ -119,7 +120,7 @@ def api_appointment_list(request):
                 appointment,
                 encoder=AppointmentDetailEncoder,
                 safe=False,
-        )
+            )
         except:
             response = JsonResponse(
                 {"message": "appointment not created"}
