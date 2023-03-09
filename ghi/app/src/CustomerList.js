@@ -1,32 +1,32 @@
 import { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 
-
-function VehicleModelList() {
-    const [models, setModels] = useState([]);
+function CustomerList() {
+    const [customer, setCustomer] = useState([]);
 
     const fetchData = async () => {
-        const url = 'http://localhost:8100/api/models/';
+        const url = 'http://localhost:8090/api/customer/';
         const response = await fetch(url);
         if(response.ok) {
             const data = await response.json();
-            setModels(data.models);
+            setCustomer(data.customer);
         }
-    }
+}
 
     useEffect(() => {
         fetchData();
     }, []);
 
     const handleDelete = async (id) => {
-        const url = `http://localhost:8100/api/models/${id}/`;
+        const url = `http://localhost:8090/api/customer/${id}/`;
         const response = await fetch(url, { method: 'DELETE' });
         if(response.ok) {
             fetchData();
         } else {
-            console.log(`Failed to delete model with ID ${id}`);
+            console.log(`Failed to delete customer with ID ${id}`);
         }
     }
+
     return (
         <div className="container">
             <div className="row">
@@ -39,39 +39,32 @@ function VehicleModelList() {
                                         <thead>
                                             <tr>
                                                 <th>Name</th>
-                                                <th>Manufacturer</th>
-                                                <th>Image</th>
-                                                <th>Remove</th>
+                                                <th>Address</th>
+                                                <th>Phone Number</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {models.map(model => {
+                                            {customer.map(cust => {
                                                 return (
-                                                    <tr key={model.id}>
-                                                        <td>{model.name}</td>
-                                                        <td>{model.manufacturer.name}</td>
-                                                        <td>
-                                                            <img
-                                                                src={model.picture_url}
-                                                                className="img-thumbnail"
-                                                                alt="new"
-                                                            />
-                                                        </td>
+                                                    <tr key={cust.id}>
+                                                        <td>{cust.name}</td>
+                                                        <td>{cust.address}</td>
+                                                        <td>{cust.phone_number}</td>
                                                         <td>
                                                             <button
-                                                                type="button" className="btn btn-outline-danger btn-sm"
-                                                                onClick={() => handleDelete(model.id)}
+                                                                className="btn btn-danger"
+                                                                onClick={() => handleDelete(cust.id)}
                                                             >
                                                                 Delete
                                                             </button>
                                                         </td>
                                                     </tr>
-                                                );
+                                                )
                                             })}
                                         </tbody>
                                     </table>
                                     <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                                        <Link to="/vehicle-model/create" className="btn btn-primary btn-lg px-4 gap-3">Add a New Vehicle Model</Link>
+                                        <Link to="/customer/create" className="btn btn-primary btn-lg px-4 gap-3">Add a New Customer</Link>
                                     </div>
                                 </div>
                                 <div className="col-sm">
@@ -85,5 +78,4 @@ function VehicleModelList() {
     );
 }
 
-
-export default VehicleModelList;
+export default CustomerList;

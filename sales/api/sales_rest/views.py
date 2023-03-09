@@ -56,6 +56,12 @@ def api_customer(request):
             response.status_code = 400
             return response
 
+@require_http_methods(["DELETE"])
+def api_customer_delete(request, pk):
+    if request.method == "DELETE":
+        count, _ = Customer.objects.filter(id=pk).delete()
+        return JsonResponse({"message": count > 0})
+
 
 @require_http_methods(["GET", "POST"])
 def api_sale_record_list(request):
@@ -67,34 +73,38 @@ def api_sale_record_list(request):
             safe=False,
         )
     else:
-        # try:
-        content = json.loads(request.body)
-        content = {
-            **content,
-            "sales_person": SalesPerson.objects.get(pk=content["sales_person"]),
-            "automobile": AutomobileVO.objects.get(vin=content["automobile"]),
-            "customer": Customer.objects.get(pk=content["customer"]),
-        }
+        try:
+            content = json.loads(request.body)
+            content = {
+                **content,
+                "sales_person": SalesPerson.objects.get(pk=content["sales_person"]),
+                "automobile": AutomobileVO.objects.get(vin=content["automobile"]),
+                "customer": Customer.objects.get(pk=content["customer"]),
+            }
 
-        sold_status = content["automobile"].sold
-        if sold_status == False:
-            content["automobile"].sold = True
-            content["automobile"].save()
+            sold_status = content["automobile"].sold
+            if sold_status == False:
+                content["automobile"].sold = True
+                content["automobile"].save()
 
-        sale_record = SaleRecord.objects.create(**content)
-        return JsonResponse(
-                {"sale_record": sale_record},
-                encoder=SaleRecordListEncoder,
-                safe=False,
+            sale_record = SaleRecord.objects.create(**content)
+            return JsonResponse(
+                    {"sale_record": sale_record},
+                    encoder=SaleRecordListEncoder,
+                    safe=False,
+                )
+        except:
+            response = JsonResponse(
+                {"message": "Sales Record cannot be created"}
             )
-        # except:
-        #     response = JsonResponse(
-        #         {"message": "Sales Record cannot be created"}
-        #     )
-        #     response.status_code = 400
-        #     return response
+            response.status_code = 400
+            return response
 
-
+@require_http_methods(["DELETE"])
+def api_sale_record_list_delete(request, pk):
+    if request.method == "DELETE":
+        count, _ = SaleRecord.objects.filter(id=pk).delete()
+        return JsonResponse({"message": count > 0})
 
 
 
