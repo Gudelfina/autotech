@@ -1,58 +1,101 @@
 import { NavLink } from 'react-router-dom';
+import { useState } from 'react';
 
 function Nav() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  function handleMouseEnter() {
+    setIsOpen(true);
+  }
+
+  function handleMouseLeave() {
+    setIsOpen(false);
+  }
+
+  function handleClick() {
+    setIsOpen(false);
+  }
+
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-success">
-      <div className="container-fluid">
-        <NavLink className="navbar-brand" to="/">CarCar</NavLink>
-        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <li className="nav-item dropdown">
-              <NavLink className="nav-link dropdown-toggle" to="/manufacturer" id="navbarDropdown1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Manufacturer
-              </NavLink>
-              <ul className="dropdown-menu" aria-labelledby="navbarDropdown1">
-                <li><NavLink className="dropdown-item" to="/manufacturer">List Manufacturer</NavLink></li>
-                <li><NavLink className="dropdown-item" to="/manufacturer/create">Create Manufacturer</NavLink></li>
-              </ul>
-            </li>
-            <li className="nav-item dropdown">
-              <NavLink className="nav-link dropdown-toggle" to="/vehicle-model" id="navbarDropdown2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Vehicle Model
-              </NavLink>
-              <ul className="dropdown-menu" aria-labelledby="navbarDropdown2">
-                <li><NavLink className="dropdown-item" to="/vehicle-model">List Vehicle Model</NavLink></li>
-                <li><NavLink className="dropdown-item" to="/vehicle-model/create">Create Vehicle Model</NavLink></li>
-              </ul>
-            </li>
-            <li className="nav-item dropdown">
-              <NavLink className="nav-link dropdown-toggle" to="/automobile" id="navbarDropdown3" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Automobile Inventory
-              </NavLink>
-              <ul className="dropdown-menu" aria-labelledby="navbarDropdown3">
-                <li><NavLink className="dropdown-item" to="/automobile">List Automobile Inventory</NavLink></li>
-                <li><NavLink className="dropdown-item" to="/automobile/create">Create Automobile Inventory</NavLink></li>
-              </ul>
-            </li>
-            <li className="nav-item dropdown">
-              <NavLink className="nav-link dropdown-toggle" to="/appointment" id="navbarDropdown3" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Appointment
-              </NavLink>
-              <ul className="dropdown-menu" aria-labelledby="navbarDropdown3">
-                <li><NavLink className="dropdown-item" to="/appointment">List Appointments</NavLink></li>
-                <li><NavLink className="dropdown-item" to="/appointment/create">Create Appointment</NavLink></li>
-              </ul>
-            </li>
-            <li className="nav-item">
-                <NavLink className="nav-link" to="/create-technician/">New Technician</NavLink>
-            </li>
-          </ul>
+    <>
+      <nav className="navbar navbar-expand-lg navbar-dark bg-success">
+        <div className="container-fluid">
+          <NavLink className="navbar-brand" to="/">CarCar</NavLink>
+          <button className="navbar-toggler" type="button" onClick={handleMouseEnter}>
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className={`navbar-collapse ${isOpen ? 'show' : ''}`} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+              <li className="nav-item dropdown">
+                <NavLink className="nav-link dropdown-toggle" to="#" id="manufacturerDropdown" role="button" data-bs-toggle="dropdown" aria-expanded={isOpen}>
+                  Manufacturer
+                </NavLink>
+                <ul className="dropdown-menu" aria-labelledby="manufacturerDropdown">
+                  <li><NavLink className="dropdown-item" to="/manufacturer/" onClick={handleClick}>List All Manufacturers</NavLink></li>
+                  <li><NavLink className="dropdown-item" to="/manufacturer/create" onClick={handleClick}>Create Manufacturer</NavLink></li>
+                </ul>
+              </li>
+              <li className="nav-item dropdown">
+                <NavLink className="nav-link dropdown-toggle" to="#" id="vehicleModelDropdown" role="button" data-bs-toggle="dropdown" aria-expanded={isOpen}>
+                  Vehicle Model
+                </NavLink>
+                <ul className="dropdown-menu" aria-labelledby="vehicleModelDropdown">
+                  <li><NavLink className="dropdown-item" to="/vehicle-model/" onClick={handleClick}>List All Vehicle Models</NavLink></li>
+                  <li><NavLink className="dropdown-item" to="/vehicle-model/create" onClick={handleClick}>Create Vehicle Model</NavLink></li>
+                </ul>
+              </li>
+              <li className="nav-item dropdown ">
+                <NavLink className="nav-link dropdown-toggle" to="#" id="automobileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded={isOpen}>
+                  Automobile Inventory
+                </NavLink>
+                <ul className="dropdown-menu" aria-labelledby="automobileDropdown ">
+                  <li><NavLink className="dropdown-item" to="/automobile/" onClick={handleClick}>List All Automobile Inventory</NavLink></li>
+                  <li><NavLink className="dropdown-item" to="/automobile/create" onClick={handleClick}>Create Automobile Inventory</NavLink></li>
+                </ul>
+              </li>
+              <li className="nav-item dropdown">
+                <NavLink className="nav-link dropdown-toggle" to="#" id="saleRecordDropdown" role="button" data-bs-toggle="dropdown" aria-expanded={isOpen}>
+                  Sale Record
+                </NavLink>
+                <ul className="dropdown-menu" aria-labelledby="saleRecordDropdown">
+                  <li><NavLink className="dropdown-item" to="/sale-record/" onClick={handleClick}>List All Sales</NavLink></li>
+                  <li><NavLink className="dropdown-item" to="/sale-record/create" onClick={handleClick}>Create Sale Record</NavLink></li>
+                </ul>
+              </li>
+              <li className="nav-item dropdown">
+                <NavLink className="nav-link dropdown-toggle" to="#" id="salesPersonDropdown" role="button" data-bs-toggle="dropdown" aria-expanded={isOpen}>
+                  Sales/Customer
+                </NavLink>
+                <ul className="dropdown-menu" aria-labelledby="salesPersonDropdown">
+                  <li><NavLink className="dropdown-item" to="/customer/create" onClick={handleClick}>Create Potential Customer</NavLink></li>
+                  <li><NavLink className="dropdown-item" to="/sales-person/create" onClick={handleClick}>Create Sales Person</NavLink></li>
+                </ul>
+              </li>
+              <li className="nav-item dropdown">
+                <NavLink className="nav-link dropdown-toggle" to="#" id="technicianDropdown" role="button" data-bs-toggle="dropdown" aria-expanded={isOpen}>
+                  New Technician
+                </NavLink>
+                <ul className="dropdown-menu" aria-labelledby="technicianDropdown">
+                  <li><NavLink className="dropdown-item" to="/create/technician" onClick={handleClick}>Create Technician</NavLink></li>
+                </ul>
+              </li>
+              <li className="nav-item dropdown">
+                <NavLink className="nav-link dropdown-toggle" to="#" id="navbarDropdown3" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Appointment
+                </NavLink>
+                <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><NavLink className="dropdown-item" to="/appointment">List Appointments</NavLink></li>
+                  <li><NavLink className="dropdown-item" to="/appointment/history">Appointment History</NavLink></li>
+                  <li><NavLink className="dropdown-item" to="/appointment/create">Create Appointment</NavLink></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+
+    </>
   )
 }
+
 export default Nav;

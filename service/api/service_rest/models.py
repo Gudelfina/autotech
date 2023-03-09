@@ -42,4 +42,7 @@ class Appointment(models.Model):
         return self.owner_name
 
     def get_api_url(self):
-        return reverse("api_show_appointment", kwargs={"id": self.id})
+        return reverse("api_show_appointment", kwargs={"vin": self.vin.vin})
+
+    # def get_history_url(self):
+    #     return reverse("api_appointment_history", kwargs={"vin": self.vin.vin})

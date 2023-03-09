@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 
 function AppointmentList(){
     const[appointment, setAppointment] = useState([])
+
     const fetchData = async () => {
         const url= 'http://localhost:8080/api/appointments/';
         const response = await fetch(url);
@@ -16,6 +17,8 @@ function AppointmentList(){
     useEffect(() => {
         fetchData();
       }, []);
+
+
 
     const handleDelete = async (id) => {
         const url = `http://localhost:8080/api/appointments/${id}/`;
@@ -37,12 +40,9 @@ function AppointmentList(){
         }
         }
 
-      if(appointment === undefined) {
-        return null;
-    }
 
     return (
-    <div className="container">
+        <div className="container">
             <h1>Service Appointments</h1>
                 <table className="table table-striped">
                 <thead>
@@ -82,5 +82,6 @@ function AppointmentList(){
             </div>
       );
 }
+
 
 export default AppointmentList;

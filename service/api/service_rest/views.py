@@ -83,7 +83,7 @@ def api_technician_list(request, technician_id=None):
             return response
 
 
-@require_http_methods(["DELETE", "GET"])
+@require_http_methods(["DELETE", "GET", "PUT"])
 def api_show_techincian(request, id):
     if request.method == "GET":
         technician = Technician.objects.get(id=id)
@@ -92,6 +92,17 @@ def api_show_techincian(request, id):
             encoder=TechnicianDetailEncoder,
             safe=False,
         )
+    elif request.method == "PUT":
+        content = json.loads(request.body)
+        try:
+            if "employee_name" in content:
+                tech = Technician.objects.get(id=content["employee_name"])
+                content["employee_name"] = tech
+        except Technician.DoesNotExist:
+            return JsonResponse(
+                {"message": "Invalid tech id"},
+                status=400,
+            )
     else:
         count, _ = Technician.objects.filter(id=id).delete()
         return JsonResponse({"deleted": count > 0})
@@ -129,7 +140,7 @@ def api_appointment_list(request):
             return response
 
 
-@require_http_methods(["DELETE", "GET"])
+@require_http_methods(["DELETE", "GET", "PUT"])
 def api_show_appointment(request, id):
     if request.method == "GET":
         appointment = Appointment.objects.get(id=id)
