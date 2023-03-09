@@ -18,6 +18,7 @@ def api_automobiles(request):
             {"autos": autos},
             encoder=AutomobileEncoder,
         )
+
     else:
         try:
             content = json.loads(request.body)
@@ -36,6 +37,7 @@ def api_automobiles(request):
             )
             response.status_code = 400
             return response
+
 
 
 @require_http_methods(["DELETE", "GET", "PUT"])

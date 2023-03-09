@@ -50,7 +50,7 @@ function ManufacturerList(){
                                     <tr key={manufacturer.id}>
                                         <td>{manufacturer.name}</td>
                                         <td>
-                                            <button type="button" className="btn btn-danger" onClick={ () => handleDelete(manufacturer.id)}>Delete</button>
+                                            <button type="button" className="btn btn-outline-danger btn-sm" onClick={ () => handleDelete(manufacturer.id)}>Delete</button>
                                         </td>
                                     </tr>
                                 );

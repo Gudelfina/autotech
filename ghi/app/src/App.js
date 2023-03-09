@@ -10,6 +10,19 @@ import TechnicianForm from './TechnicianForm';
 import AppointmentForm from './AppointmentForm';
 import AppointmentList from './AppointmentList';
 import AppointmentHistory from './AppointmentHistory';
+import AutomobileForm from './AutomobileForm'
+import AutomobileList from './AutomobileList'
+import SaleRecordForm from './SaleRecordForm';
+import SaleRecordList from './SaleRecordList';
+import SalesPersonForm from './SalesPersonForm';
+import CustomerForm from './CustomerForm';
+import CustomerList from './CustomerList';
+import SalesPersonList from './SalesPersonList';
+import TechnicianForm from './TechnicianForm';
+import AppointmentForm from './AppointmentForm';
+import AppointmentList from './AppointmentList';
+import AppointmentHistory from './AppointmentHistory';
+
 
 function App() {
   return (
