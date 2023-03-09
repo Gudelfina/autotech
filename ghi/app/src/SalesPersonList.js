@@ -36,6 +36,7 @@ function SalesPersonList() {
                         <div className="shadow p-4 mt-4">
                             <div className="card shadow">
                                 <div className="card-body">
+                                        <h1>List of Sales People</h1>
                                     <table className="table table-striped">
                                         <thead>
                                             <tr>

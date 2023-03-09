@@ -35,19 +35,19 @@ function AppointmentHistory(){
     }
 
 
-    // const handleHistory = async (vin) => {
-    //     const url = `http://localhost:8080/api/appointments/${vin}/`;
-    //     const response = await fetch(url, { method: 'GET' });
-    //     if(response.ok) {
-    //         fetchData();
-    //     } else {
-    //         console.log(`Failed to get appointment history with vin ${vin}`);
-    //     }
-    //     }
+    const handleHistory = async (vin) => {
+        const url = `http://localhost:8080/api/appointments/${vin}/`;
+        const response = await fetch(url, { method: 'GET' });
+        if(response.ok) {
+            fetchData();
+        } else {
+            console.log(`Failed to get appointment history with vin ${vin}`);
+        }
+        }
 
-    //   if(appointment === undefined) {
-    //     return null;
-    // }
+      if(appointment === undefined) {
+        return null;
+    }
 
 
     return (
@@ -98,4 +98,4 @@ function AppointmentHistory(){
 }
 
 
-export default AppointmentHistory;
+export default AppointmentHistory

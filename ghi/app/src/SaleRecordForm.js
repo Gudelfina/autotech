@@ -9,35 +9,7 @@ function SaleRecordForm() {
     const [customers, setCustomers] = useState([]);
     const [sale_price, setSale_price] = useState('');
 
-    // const fetchData = async () => {
-    //     const autosUrl = 'http://localhost:8100/api/automobiles/';
 
-    //     const response = await fetch(autosUrl);
-    //     if (response.ok) {
-    //         const data = await response.json();
-    //         setAutos(data.autos);
-    //     }
-    // }
-
-    // const fetchData2 = async () => {
-    //     const salesPersonsUrl = 'http://localhost:8090/api/sales-person/';
-    //     const response = await fetch(salesPersonsUrl);
-    //     if (response.ok) {
-    //         const data = await response.json();
-
-    //         setSales_persons(data.sales_persons);
-
-    //     }
-    // }
-
-    // const fetchData3 = async () => {
-    //     const customersUrl = 'http://localhost:8090/api/customer/';
-    //     const response = await fetch(customersUrl);
-    //     if (response.ok) {
-    //         const data = await response.json();
-    //         setCustomers(data.customers);
-    //     }
-    // }
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -47,7 +19,7 @@ function SaleRecordForm() {
         data.customer = customer;
         data.sale_price = sale_price;
         const url = 'http://localhost:8090/api/sale-record/';
-        console.log(data.auto)
+
         const fetchOptions = {
             method: 'POST',
             headers: {
@@ -64,6 +36,7 @@ function SaleRecordForm() {
             setSale_price('');
         }
     }
+
 
     const handleChangeAuto = (event) => {
         const value = event.target.value;
@@ -86,9 +59,9 @@ function SaleRecordForm() {
     }
 
     useEffect(() => {
-        fetch('http://localhost:8100/api/automobiles/')
+        fetch('http://localhost:8090/api/automobile-vo/')
             .then(res => res.json())
-            .then(res => setAutomobiles(res.autos))
+            .then(res => setAutomobiles(res.automobile))
         fetch("http://localhost:8090/api/sales-person/")
             .then(res => res.json())
             .then(res => setSales_persons(res.sales_person))
@@ -97,11 +70,12 @@ function SaleRecordForm() {
             .then(res => setCustomers(res.customer))
     }, [])
 
+
     return (
         <div className="container">
         <div className="row">
             <div className="offset-3 col-6">
-                <div className="shadow p-4 mt-4">
+                <div className="shadow p-4 mt-6">
                     <div className="card shadow">
                         <div className="card-body">
                             <h1 className="card-title">Create New Sale Record</h1>
@@ -114,7 +88,7 @@ function SaleRecordForm() {
                                     <option value="">Choose Automobile by VIN</option>
                                     {automobiles.filter(automobile=>!automobile.sold)?.map(automobile => {
                                         return (
-                                            <option key={automobile.id} value={automobile.vin}>
+                                            <option key={automobile.vin} value={automobile.vin}>
                                                 {automobile.vin}
                                             </option>
                                         )
@@ -146,8 +120,8 @@ function SaleRecordForm() {
                                     </select>
                                 </div>
                                 <div className="mb-3">
-                                    <input onChange={handleChangeSale_price} required type="text" className="form-control" id="sale_price" name="sale_price" value={sale_price} />
                                     <label htmlFor="sale_price">Enter Sale Price</label>
+                                    <input onChange={handleChangeSale_price} required type="text" className="form-control" id="sale_price" name="sale_price" value={sale_price} />
                                 </div>
                                 <button className="btn btn-lg btn-primary">Submit</button>
                             </form>

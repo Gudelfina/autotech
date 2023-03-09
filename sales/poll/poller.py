@@ -31,7 +31,7 @@ def poll():
             get_vin()
         except Exception as e:
             print(e, file=sys.stderr)
-        time.sleep(20)
+        time.sleep(10)
 
 
 if __name__ == "__main__":

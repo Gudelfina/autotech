@@ -55,20 +55,14 @@ function Nav() {
               </li>
               <li className="nav-item dropdown">
                 <NavLink className="nav-link dropdown-toggle" to="#" id="saleRecordDropdown" role="button" data-bs-toggle="dropdown" aria-expanded={isOpen}>
-                  Sale Record
+                  Sales
                 </NavLink>
                 <ul className="dropdown-menu" aria-labelledby="saleRecordDropdown">
-                  <li><NavLink className="dropdown-item" to="/sale-record/" onClick={handleClick}>List All Sales</NavLink></li>
-                  <li><NavLink className="dropdown-item" to="/sale-record/create" onClick={handleClick}>Create Sale Record</NavLink></li>
-                </ul>
-              </li>
-              <li className="nav-item dropdown">
-                <NavLink className="nav-link dropdown-toggle" to="#" id="salesPersonDropdown" role="button" data-bs-toggle="dropdown" aria-expanded={isOpen}>
-                  Sales/Customer
-                </NavLink>
-                <ul className="dropdown-menu" aria-labelledby="salesPersonDropdown">
-                  <li><NavLink className="dropdown-item" to="/customer/create" onClick={handleClick}>Create Potential Customer</NavLink></li>
                   <li><NavLink className="dropdown-item" to="/sales-person/create" onClick={handleClick}>Create Sales Person</NavLink></li>
+                  <li><NavLink className="dropdown-item" to="/customer/create" onClick={handleClick}>Create Customer</NavLink></li>
+                  <li><NavLink className="dropdown-item" to="/sale-record/create" onClick={handleClick}>Create Sale Record</NavLink></li>
+                  <li><NavLink className="dropdown-item" to="/sale-record/" onClick={handleClick}>List All Sales</NavLink></li>
+                  <li><NavLink className="dropdown-item" to="/sales-person/detail" onClick={handleClick}>List Sales by Person </NavLink></li>
                 </ul>
               </li>
               <li className="nav-item dropdown">
@@ -85,7 +79,7 @@ function Nav() {
                 </NavLink>
                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                   <li><NavLink className="dropdown-item" to="/appointment">List Appointments</NavLink></li>
-                  <li><NavLink className="dropdown-item" to="/appointment/history">Appointment History</NavLink></li>
+                  {/* <li><NavLink className="dropdown-item" to="/appointment/history">Appointment History</NavLink></li> */}
                   <li><NavLink className="dropdown-item" to="/appointment/create">Create Appointment</NavLink></li>
                 </ul>
               </li>

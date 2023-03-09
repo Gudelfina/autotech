@@ -9,19 +9,17 @@ import AutomobileList from './AutomobileList';
 import TechnicianForm from './TechnicianForm';
 import AppointmentForm from './AppointmentForm';
 import AppointmentList from './AppointmentList';
-import AppointmentHistory from './AppointmentHistory';
+// import AppointmentHistory from './AppointmentHistory';
 import AutomobileForm from './AutomobileForm'
-import AutomobileList from './AutomobileList'
 import SaleRecordForm from './SaleRecordForm';
 import SaleRecordList from './SaleRecordList';
 import SalesPersonForm from './SalesPersonForm';
 import CustomerForm from './CustomerForm';
 import CustomerList from './CustomerList';
 import SalesPersonList from './SalesPersonList';
-import TechnicianForm from './TechnicianForm';
-import AppointmentForm from './AppointmentForm';
-import AppointmentList from './AppointmentList';
-import AppointmentHistory from './AppointmentHistory';
+import SalePersonDetailList from './SalesPersonDetailList';
+
+
 
 
 function App() {
@@ -54,11 +52,12 @@ function App() {
           <Route path="/sales-person/">
             <Route path="" element={<SalesPersonList />} />
             <Route path="create" element={<SalesPersonForm />} />
+            <Route path="detail"  element={<SalePersonDetailList />} />
           </Route>
           <Route path="create-technician" element={<TechnicianForm />} />
           <Route path="/appointment/">
               <Route path="" element={<AppointmentList />} />
-              <Route path="history" element={<AppointmentHistory />} />
+              {/* <Route path="history" element={<AppointmentHistory />} /> */}
               <Route path="create" element={<AppointmentForm />} />
           </Route>
         </Routes>

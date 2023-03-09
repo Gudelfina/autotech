@@ -44,4 +44,5 @@ class SaleRecordListEncoder(ModelEncoder):
     def get_extra_data(self, o):
         return {
             "vin": o.automobile.vin,
+            "employee_number": o.sales_person.employee_number,
         }
