@@ -51,7 +51,7 @@ function AppointmentList(){
                 <div className='my-3'>
                     <input
                     onChange={(e) => setSearch(e.target.value)}
-                    placeholder='Search appointments'/>
+                    placeholder='Search VIN'/>
                 </div>
             </form>
                 <table className="table table-striped">
