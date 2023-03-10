@@ -55,23 +55,17 @@ Additionally, you can use the Docker Desktop GUI to find and access the containe
 The service microservice allows a user to create a technician and appointment for a customer. It also allows the user to be able to see the full list of appointments and filter through them by inputing an existing VIN. The user will also have the feature to cancel and complete an appointment when it is finished. In order for the service miscroservice to function, I needed to poll data from inventory microservice. For this we used a poller to pull the VIN data in order to incroporate into my own model as a value object. In my service models, I used the Technician and AutomobileVO as foreign keys for the Appointment model. NOTE: Creating an appointment also relies on creating a technician first as well. This allows for the appointment instances to be created with the complete data. In the front-end of the application, there are links to each form and lists, categorized by name: technician and appointment.
 # Sales microservice
 
-This Auto Sales application is a full-stack service that enables users to track and manage automobile sales from their inventory. The application provides a range of features, including the ability to add salespeople and potential customers, create sales records, view all sales, and display sales history for a particular salesperson.The app is built using a microservices architecture, with the Inventory microservice integrated to ensure data consistency. It allows for real-time updates on the inventory and prevents the sale of a car that is not listed or has already been sold.
+This automobile sales management system is a comprehensive, full-stack service that allows users to manage and monitor their inventory of automobiles. It offers a variety of features such as adding salespeople and customers, creating sales records, viewing sales history, and displaying sales history for specific salespeople. The app is built on a microservices architecture with an inventory microservice integrated to maintain data consistency. It also enables real-time updates on the inventory and prevents the sale of vehicles that aren't listed or have already been sold.
 
-The front-end of the application is built using React, with forms for adding salespeople and customers and a responsive navbar for easy navigation. The back-end is powered by a RESTful API, built using a web framework and a robust database management system to ensure efficient data storage and retrieval. To summarize, this Auto Sales application provides a solution for managing and tracking automobile inventory sales.
+The front-end of the application uses React, offering forms for adding salespeople and customers via the navbar. The back-end is powered by a RESTful API, using a web framework and a database management system for efficient data storage and retrieval.
 
-This Auto Sales application employs a Model-View-Template architecture and uses Django as the web framework. The application's back-end is powered by a relational database management system, which stores data in tables and allows for efficient querying and manipulation of data.
+The application's back-end is built on the Model-View-Template architecture, using Django as the web framework. The back-end is supported by a relational database management system that stores data in tables and facilitates efficient data manipulation and querying. The models.py file defines the database schema, specifying the fields and relationships between entities. The file includes four models: AutomobileVO, SalesPerson, Customer, and SaleRecord.
 
-The models.py file defines the database schema and specifies the fields and relationships between the entities. The file defines four models: AutomobileVO, SalesPerson, Customer, and SaleRecord.
+The AutomobileVO model defines the attributes of an automobile entity, including its Vehicle Identification Number (VIN) and a Boolean field indicating whether it has been sold or not. The SalesPerson model specifies the attributes of a salesperson entity, such as their name and employee number. The Customer model specifies the attributes of a customer entity, such as their name, address, and phone number. The SaleRecord model defines the relationship between the AutomobileVO, SalesPerson, and Customer models, storing information such as the sale price of the automobile. The SaleRecord model has foreign keys to each of the other three models, indicating the relationships between them. The models.py file also includes a get_api_url method for the SaleRecord model that generates a URL for the API endpoint corresponding to the SaleRecord model.
 
-AutomobileVO model specifies the attributes of an automobile entity such as its Vehicle Identification Number (VIN), and a Boolean field to indicate whether the car is sold or not.
+The inventory of the automobile sales management system is updated in real-time using a script that we will refer to as "poller.py". The script monitors the inventory API for the latest information on automobiles in the inventory every 10 seconds, updating the AutomobileVO model in the Django application's database to ensure consistency between the inventory API and the automobile sales management system. The script is designed to handle any exceptions that may occur during its execution, with any errors printed to stderr for easy debugging.
 
-The SalesPerson model specifies the attributes of a salesperson entity such as their name and employee number.
-
-The Customer model specifies the attributes of a customer entity such as their name, address, and phone number.
-
-The SaleRecord model specifies the relationship between the AutomobileVO, SalesPerson, and Customer models, and stores information such as the sale price of the automobile. The SaleRecord model has foreign keys to each of the other three models, indicating the relationships between them.
-
-The models.py file also defines a get_api_url method for the SaleRecord model, which generates a URL for the API endpoint that corresponds to the SaleRecord model.
+The front-end and back-end of the automobile sales management system are designed to work together seamlessly, providing a comprehensive solution for managing and monitoring automobile inventory sales.
 
 # Services
 
@@ -309,6 +303,8 @@ Returns
     }
 }
 ```
+
+## NOTE - All VINs must be unique. If you try to create an automobile with a VIN that already exists, you will get an error. Additionally, the VIN can be up to 17 characters long.
 
 ### Get list of Automobiles
 GET request to http://localhost:8100/api/automobiles/ - no body required:
