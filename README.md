@@ -6,7 +6,7 @@ Team:
 * Noah Granard- sales
 
 ## Design
-![image](https://i.imgur.com/voO1pow.jpg)
+![image](https://i.imgur.com/q94m4wp.jpg)
 
 ## Service microservice
 
