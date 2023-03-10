@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import api_sales_person, api_customer, api_sale_record_list, api_automobile_vo, api_sale_record_list_delete, api_customer_delete
+from .views import api_sales_person, api_customer, api_sale_record_list, api_automobile_vo, api_sale_record_list_delete, api_customer_delete, api_sales_person_detail, api_sale_record_detail
 
 urlpatterns = [
     path(
@@ -9,9 +9,21 @@ urlpatterns = [
     name='api_sales_person'),
 
     path(
+    'sales-person/',
+    api_sales_person_detail,
+    name='api_sales_person_detail'
+    ),
+
+    path(
     'sale-record/',
     api_sale_record_list,
     name='api_sale_record_list'),
+
+    path(
+    'sale-record/<int:pk>/',
+    api_sale_record_detail,
+    name='api_sale_record_detail'
+    ),
 
     path(
     'sale-record/<int:pk>/',

@@ -35,7 +35,7 @@ const handleDelete = async (id) => {
     <div className="container">
         <div className="row">
             <div className="col-sm">
-                <div className="offset-3 col-7">
+                <div className="offset-3 col-8">
                     <div className="shadow p-4 mt-4">
                         <div className="card shadow">
                         <div className="card-body">

@@ -6,7 +6,7 @@ Team:
 * Noah Granard- sales
 
 ## Design
-
+![Project Diagram](./project-beta/CC.png)
 ## Service microservice
 
 Explain your models and integration with the inventory

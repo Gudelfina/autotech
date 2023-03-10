@@ -30,6 +30,21 @@ def api_sales_person(request):
             response.status_code = 400
             return response
 
+@require_http_methods(["GET"])
+def api_sales_person_detail(request, pk):
+    if request.method == "GET":
+        try:
+            salesperson = SalesPerson.objects.get(pk=pk)
+            return JsonResponse(
+                salesperson,
+                encoder=SalesPersonEncoder,
+                safe=False
+        )
+        except SalesPerson.DoesNotExist:
+            response = JsonResponse({"message": "Sales Person does not exist"})
+            response.status_code = 404
+            return response
+
 
 @require_http_methods(["GET", "POST"])
 def api_customer(request):
@@ -86,6 +101,12 @@ def api_sale_record_list(request):
             if sold_status == False:
                 content["automobile"].sold = True
                 content["automobile"].save()
+            else:
+                response = JsonResponse(
+                    {"message": "Automobile already sold"}
+                )
+                response.status_code = 400
+                return response
 
             sale_record = SaleRecord.objects.create(**content)
             return JsonResponse(
@@ -100,6 +121,22 @@ def api_sale_record_list(request):
             response.status_code = 400
             return response
 
+
+@require_http_methods(["GET"])
+def api_sale_record_detail(request, pk):
+    if request.method == "GET":
+        try:
+            sale_records = SaleRecord.objects.filter(sales_person_id=pk)
+            return JsonResponse(
+                {"sale_records": list(sale_records.values())},
+                encoder=SaleRecordListEncoder,
+                safe=False,
+            )
+        except SaleRecord.DoesNotExist:
+            response = JsonResponse({"message": "Sale Record does not exist"})
+            response.status_code = 404
+            return response
+
 @require_http_methods(["DELETE"])
 def api_sale_record_list_delete(request, pk):
     if request.method == "DELETE":
@@ -109,7 +146,7 @@ def api_sale_record_list_delete(request, pk):
 
 
 
-@require_http_methods(["GET"])
+@require_http_methods(["GET", "DELETE"])
 def api_automobile_vo(request):
     if request.method == "GET":
         automobile = AutomobileVO.objects.all()
@@ -118,3 +155,6 @@ def api_automobile_vo(request):
             encoder=AutomobileVOEncoder,
             safe=False,
         )
+    else:
+        count, _ = AutomobileVO.objects.all().delete()
+        return JsonResponse({"message": count > 0})
