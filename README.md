@@ -3,7 +3,7 @@
 Team:
 
 * Lupe Mendez - Services
-# NOTE : when creating an appointment, use a VIN that is already exisiting from the inventory microservice automobile section. It will not allow you to create your own unfortunately
+# NOTE : when creating an appointment, use a VIN that is already exisiting from the inventory microservice automobile section. It will not allow you to create your own unfortunately.
 
 
 * Noah Granard- Sales
@@ -50,7 +50,7 @@ Additionally, you can use the Docker Desktop GUI to find and access the containe
 
 ### Service microservice
 
-The service microservice allows a user to create a technician and appointment for a customer. It also allows the user to be able to see the full list of appointments and filter through them by inputing an existing VIN. The user will also have the feature to cancel and complete an appointment when it is finished. In order for the service miscroservice to function, I needed to poll data from inventory microservice. For this we used a poller to pull the VIN data in order to incroporate into my own model as a value object. In my service models, I used the Technician and AutomobileVO as foreign keys for the Appointment model. NOTE: Creating an appointment also relies on creating a technician first as well. This allows for the appointment instances to be created with the complete data. In the fron-end of the application, there are links to each form and lists, categorized by name: technician and appointment.
+The service microservice allows a user to create a technician and appointment for a customer. It also allows the user to be able to see the full list of appointments and filter through them by inputing an existing VIN. The user will also have the feature to cancel and complete an appointment when it is finished. In order for the service miscroservice to function, I needed to poll data from inventory microservice. For this we used a poller to pull the VIN data in order to incroporate into my own model as a value object. In my service models, I used the Technician and AutomobileVO as foreign keys for the Appointment model. NOTE: Creating an appointment also relies on creating a technician first as well. This allows for the appointment instances to be created with the complete data. In the front-end of the application, there are links to each form and lists, categorized by name: technician and appointment.
 ### Sales microservice
 
 This Auto Sales application is a full-stack service that enables users to track and manage automobile sales from their inventory. The application provides a range of features, including the ability to add salespeople and potential customers, create sales records, view all sales, and display sales history for a particular salesperson.The app is built using a microservices architecture, with the Inventory microservice integrated to ensure data consistency. It allows for real-time updates on the inventory and prevents the sale of a car that is not listed or has already been sold.
@@ -71,7 +71,7 @@ The SaleRecord model specifies the relationship between the AutomobileVO, SalesP
 
 The models.py file also defines a get_api_url method for the SaleRecord model, which generates a URL for the API endpoint that corresponds to the SaleRecord model.
 
-## Services
+### Services
 
 The following services (via POST request) should be executed in the following order, as they depend on each other.
 1. Manufacturers
@@ -82,7 +82,7 @@ The following services (via POST request) should be executed in the following or
 The Manufacturers service is responsible for managing the manufacturer information for the automobiles. It provides the ability to add, update, and delete manufacturers. It also provides the ability to view all manufacturers and view a specific manufacturer.
 
 ## Manufacturers CRUD Documentation (API)
-
+<details>
 # Create a manufacturer
 POST request to http://localhost:8100/api/manufacturers/ with the following JSON body:
 ```
@@ -149,12 +149,13 @@ Returns
 	"name": "Ford"
 }
 ```
+</details>
 
 ### Vehicle Models
 The Vehicle Models service is responsible for managing the vehicle model information for the automobiles. It provides the ability to add, update, and delete vehicle models. It also provides the ability to view all vehicle models and view a specific vehicle model.
 
 ## Vehicle Models CRUD Documentation (API)
-
+<details>
 # Create a vehicle model
 POST request to http://localhost:8100/api/models/ with the following JSON body:
 
@@ -262,7 +263,7 @@ Returns
 	}
 }
 ```
-
+</details>
 
 ### Automobile Models
 The Automobile Models service is responsible for managing the automobile information for the automobiles. It provides the ability to add, update, and delete automobiles. It also provides the ability to view all automobiles and view a specific automobile.
