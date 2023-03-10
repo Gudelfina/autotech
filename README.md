@@ -85,6 +85,7 @@ The Manufacturers service is responsible for managing the manufacturer informati
 
 ## Manufacturers CRUD Documentation (API)
 <details>
+
 # Create a manufacturer
 POST request to http://localhost:8100/api/manufacturers/ with the following JSON body:
 ```
@@ -630,6 +631,7 @@ Returns
 
 ## Sales Person CRUD Documentation (API)
 <details>
+
 # Create Sales Person
 POST request to http://localhost:8090/api/sales-person/ with the following JSON body:
 
