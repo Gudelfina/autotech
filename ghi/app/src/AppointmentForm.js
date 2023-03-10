@@ -18,7 +18,6 @@ function AppointmentForm(){
         if (response.ok) {
           const data = await response.json();
           setTechnicians(data.technicians)
-          console.log(data)
         }
       }
 
@@ -39,7 +38,6 @@ function AppointmentForm(){
         data.time = time;
         data.reason = reason;
         data.technician = technician;
-        console.log(data)
 
         const url = 'http://localhost:8080/api/appointments/';
         const fetchOptions = {
@@ -51,8 +49,6 @@ function AppointmentForm(){
         };
         const response = await fetch(url, fetchOptions);
         if (response.ok) {
-            const newAppointment = await response.json();
-            console.log(newAppointment)
 
             setName('');
             setVin('');

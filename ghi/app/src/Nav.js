@@ -85,7 +85,6 @@ function Nav() {
                 </NavLink>
                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                   <li><NavLink className="dropdown-item" to="/appointment">List Appointments</NavLink></li>
-                  <li><NavLink className="dropdown-item" to="/appointment/history">Appointment History</NavLink></li>
                   <li><NavLink className="dropdown-item" to="/appointment/create">Create Appointment</NavLink></li>
                 </ul>
               </li>

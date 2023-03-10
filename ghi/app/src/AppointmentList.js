@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 
 function AppointmentList(){
     const[appointment, setAppointment] = useState([])
+    const[search, setSearch] = useState('');
 
     const fetchData = async () => {
         const url= 'http://localhost:8080/api/appointments/';
@@ -14,36 +15,45 @@ function AppointmentList(){
         }
 
 
+    const handleDelete = async (id) => {
+        const url = `http://localhost:8080/api/appointments/${id}/`;
+        const response = await fetch(url, { method: 'DELETE' });
+        if(response.ok) {
+            fetchData();
+        }
+        }
+
+    const handleComplete = async (id) => {
+        const complete = appointment.find((apps) => apps.id === id);
+        complete.completed = true;
+        const url = `http://localhost:8080/api/appointments/${id}/`;
+        const fetchConfig = {
+            method: 'PUT',
+            body: JSON.stringify({completed: true}),
+            headers: {'Content-Type': 'application/json'}
+    }
+        await fetch(url, fetchConfig)
+        fetchData();
+    }
+
+    const finished = appointment.filter((apps) => apps.completed === false);
+
     useEffect(() => {
         fetchData();
       }, []);
 
 
 
-    const handleDelete = async (id) => {
-        const url = `http://localhost:8080/api/appointments/${id}/`;
-        const response = await fetch(url, { method: 'DELETE' });
-        if(response.ok) {
-            fetchData();
-        } else {
-            console.log(`Failed to delete appointment with ID ${id}`);
-        }
-        }
-
-    const handleComplete = async (id) => {
-        const url = `http://localhost:8080/api/appointments/${id}/`;
-        const response = await fetch(url, { method: 'DELETE' });
-        if(response.ok) {
-            fetchData();
-        } else {
-            console.log(`Failed to complete appointment with ID ${id}`);
-        }
-        }
-
-
     return (
         <div className="container">
             <h1>Service Appointments</h1>
+            <form>
+                <div className='my-3'>
+                    <input
+                    onChange={(e) => setSearch(e.target.value)}
+                    placeholder='Search appointments'/>
+                </div>
+            </form>
                 <table className="table table-striped">
                 <thead>
                     <tr>
@@ -53,12 +63,21 @@ function AppointmentList(){
                     <th>Time</th>
                     <th>Technician</th>
                     <th>Reason</th>
+                    <th>VIP Status</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {appointment.map(app => {
+                    {appointment.filter((item) => {
+                        return search.toUpperCase() ===''
+                        ? item
+                        : item.vin.vin.toUpperCase().includes(search);
+                    })
+                    .filter((item) => {
+                        return finished.includes(item);
+                      })
+                        .map(app => {
                     return (
-                        <tr key={app.href}>
+                        <tr key={app.id}>
                             <td>{app.vin.vin}</td>
                             <td>{app.owner_name}</td>
                             <td>{app.date}</td>
@@ -82,6 +101,7 @@ function AppointmentList(){
             </div>
       );
 }
+
 
 
 export default AppointmentList;
