@@ -22,8 +22,6 @@ function ManufacturerList(){
         const response = await fetch(url, { method: 'DELETE' });
         if(response.ok) {
             fetchData();
-        } else {
-            console.log(`Failed to delete manufacturer with ID ${id}`);
         }
         }
 
