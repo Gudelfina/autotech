@@ -18,8 +18,6 @@ function AutomobileList() {
         const response = await fetch(url, { method: 'DELETE' });
         if (response.ok) {
             fetchData();
-        } else {
-            console.log(`Failed to delete vehicle model with ID ${vin}`);
         }
     }
     if (automobiles === undefined) {

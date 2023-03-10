@@ -30,7 +30,7 @@ def api_sales_person(request):
             response.status_code = 400
             return response
 
-@require_http_methods(["GET"])
+@require_http_methods(["GET", "DELETE"])
 def api_sales_person_detail(request, pk):
     if request.method == "GET":
         try:
@@ -44,6 +44,11 @@ def api_sales_person_detail(request, pk):
             response = JsonResponse({"message": "Sales Person does not exist"})
             response.status_code = 404
             return response
+    else:
+        count, _ = SalesPerson.objects.filter(id=pk).delete()
+        return JsonResponse({"message": count > 0})
+
+
 
 
 @require_http_methods(["GET", "POST"])
@@ -136,15 +141,6 @@ def api_sale_record_detail(request, pk):
             response = JsonResponse({"message": "Sale Record does not exist"})
             response.status_code = 404
             return response
-
-@require_http_methods(["DELETE"])
-def api_sale_record_list_delete(request, pk):
-    if request.method == "DELETE":
-        count, _ = SaleRecord.objects.filter(id=pk).delete()
-        return JsonResponse({"message": count > 0})
-
-
-
 
 @require_http_methods(["GET", "DELETE"])
 def api_automobile_vo(request):

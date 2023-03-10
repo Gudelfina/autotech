@@ -32,6 +32,7 @@ function SalePersonDetailList() {
         fetchData(value);
     };
 
+
     const filteredSaleRecords = saleRecords.filter(saleRecord => saleRecord.sales_person.id === Number(sales_person));
 
     return (
@@ -76,11 +77,6 @@ function SalePersonDetailList() {
                                                         <td>{saleRecord.customer.name}</td>
                                                         <td>{saleRecord.vin}</td>
                                                         <td>{saleRecord.sale_price}</td>
-                                                        <td>
-                                                            <button type="button" className="btn btn-outline-danger btn-sm">
-                                                                Delete
-                                                            </button>
-                                                        </td>
                                                     </tr>
                                                 );
                                             })}

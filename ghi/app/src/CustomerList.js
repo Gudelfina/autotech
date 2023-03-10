@@ -22,8 +22,6 @@ function CustomerList() {
         const response = await fetch(url, { method: 'DELETE' });
         if(response.ok) {
             fetchData();
-        } else {
-            console.log(`Failed to delete customer with ID ${id}`);
         }
     }
 

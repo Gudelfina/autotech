@@ -18,16 +18,6 @@ function SalesPersonList() {
         fetchData();
     }, []);
 
-    const handleDelete = async (id) => {
-        const url = `http://localhost:8090/api/sales-person/${id}/`;
-        const response = await fetch(url, { method: 'DELETE' });
-        if(response.ok) {
-            fetchData();
-        } else {
-            console.log(`Failed to delete sales person with ID ${id}`);
-        }
-    }
-
     return (
         <div className="container">
             <div className="row">
@@ -51,12 +41,6 @@ function SalesPersonList() {
                                                         <td>{sp.name}</td>
                                                         <td>{sp.employee_number}</td>
                                                         <td>
-                                                            <button
-                                                                className="btn btn-danger"
-                                                                onClick={() => handleDelete(sp.id)}
-                                                            >
-                                                                Delete
-                                                            </button>
                                                         </td>
                                                     </tr>
                                                 );

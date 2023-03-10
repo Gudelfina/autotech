@@ -15,7 +15,7 @@ function ManufacturerForm(){
 
         const data = {};
         data.name = manufacturer;
-        console.log(data)
+
 
 
         const url = 'http://localhost:8100/api/manufacturers/';
@@ -28,7 +28,6 @@ function ManufacturerForm(){
             };
             const response = await fetch(url, fetchOptions);
             if (response.ok) {
-              console.log(data)
                 setManufacturer('');
             }
 }

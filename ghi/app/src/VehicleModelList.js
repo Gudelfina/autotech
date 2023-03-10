@@ -23,8 +23,6 @@ function VehicleModelList() {
         const response = await fetch(url, { method: 'DELETE' });
         if(response.ok) {
             fetchData();
-        } else {
-            console.log(`Failed to delete model with ID ${id}`);
         }
     }
     return (

@@ -17,16 +17,6 @@ function SaleRecordList(){
         fetchData();
     }, []);
 
-const handleDelete = async (id) => {
-    const url = `http://localhost:8090/api/sale-record/${id}/`;
-    const response = await fetch(url, {method: 'DELETE'});
-    if(response.ok){
-        fetchData();
-    } else {
-        console.log(`Failed to delete sale record with ID ${id}`);
-    }
-}
-
     if(saleRecords === undefined) {
         return null;
     }
@@ -59,14 +49,6 @@ const handleDelete = async (id) => {
                                         <td>{saleRecord.customer.name}</td>
                                         <td>{saleRecord.vin}</td>
                                         <td>{saleRecord.sale_price}</td>
-                                        <td>
-                                            <button
-                                                type="button" className="btn btn-outline-danger btn-sm"
-                                                onClick={() => handleDelete(saleRecord.id)}
-                                            >
-                                                Delete
-                                            </button>
-                                        </td>
                                     </tr>
                                 );
                                 }
