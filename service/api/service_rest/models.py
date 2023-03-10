@@ -24,6 +24,7 @@ class Appointment(models.Model):
     date = models.DateField()
     time = models.TimeField()
     reason = models.TextField(max_length=300)
+    completed = models.BooleanField(default=False)
 
     vin = models.ForeignKey(
         AutomobileVO,
@@ -36,13 +37,3 @@ class Appointment(models.Model):
         related_name="appointments",
         on_delete=models.CASCADE
     )
-
-
-    def __str__(self):
-        return self.owner_name
-
-    def get_api_url(self):
-        return reverse("api_show_appointment", kwargs={"vin": self.vin.vin})
-
-    # def get_history_url(self):
-    #     return reverse("api_appointment_history", kwargs={"vin": self.vin.vin})

@@ -5,19 +5,18 @@ import VehicleModelForm from './VehicleModelForm';
 import VehicleModelList from './VehicleModelList';
 import ManufacturerForm from './ManufacturerForm';
 import ManufacturerList from './ManufacturerList';
+import AutomobileForm from './AutomobileForm'
 import AutomobileList from './AutomobileList';
-import TechnicianForm from './TechnicianForm';
 import AppointmentForm from './AppointmentForm';
 import AppointmentList from './AppointmentList';
-import AutomobileForm from './AutomobileForm'
 import SaleRecordForm from './SaleRecordForm';
 import SaleRecordList from './SaleRecordList';
 import SalesPersonForm from './SalesPersonForm';
+import SalePersonDetailList from './SalesPersonDetailList';
+import SalesPersonList from './SalesPersonList';
 import CustomerForm from './CustomerForm';
 import CustomerList from './CustomerList';
-import SalesPersonList from './SalesPersonList';
-import SalePersonDetailList from './SalesPersonDetailList';
-
+import TechnicianForm from './TechnicianForm';
 
 
 
