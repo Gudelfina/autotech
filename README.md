@@ -16,32 +16,16 @@ Team:
 3. Run Docker Desktop
 
 4. Build the Docker container with the following commands in your terminal:
+
 ```
 docker volume create beta-data
 docker-compose up --build
 ```
-5. Make migrations with the following commands:
-```docker exec -it «api-container-name» bash
-    python manage.py makemigrations
-    python manage.py migrate
-```
-6. Create a superuser with the following commands:
-```docker exec -it «api-container-name» bash
-    python manage.py createsuperuser
-```
-(Follow along with prompts provided in the terminal)
 
-7. Open a browser and navigate to http://localhost:3000 to view the application
-
-n.b. - Any commands which require the container name can be found by running the following command:
-```
-docker ps
-
-```
-Additionally, you can use the Docker Desktop GUI to find and access the container name, or simply access the individual containers via their specific terminal.
+5. Open a browser and navigate to http://localhost:3000 to view the application
 
 # Design Priniciples
-![image](https://i.imgur.com/q94m4wp.jpg)
+![image](https://i.imgur.com/xegfiBK.jpg)
 
 
 # Ports

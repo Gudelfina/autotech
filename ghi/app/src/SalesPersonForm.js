@@ -52,11 +52,11 @@ function SalesPersonForm() {
                                     Please enter the name and employee number of the sales person.
                                 </p>
                                 <div className="form-floating mb-3">
-                                    <input onChange={handleChangeName} placeholder="name" value={name} type="text" className="form-control" id="name" placeholder="name" value={name}/>
+                                    <input onChange={handleChangeName} placeholder="name" value={name} type="text" className="form-control" id="name" />
                                     <label htmlFor="name">Name</label>
                                 </div>
                                 <div className="form-floating mb-3">
-                                    <input onChange={handleChangeEmployee_number} placeholder="employee_number" value={employee_number} type="text" className="form-control" id="employee_number" placeholder="employee_number" value={employee_number}/>
+                                    <input onChange={handleChangeEmployee_number} placeholder="employee_number" value={employee_number} type="text" className="form-control" id="employee_number" />
                                     <label htmlFor="employee_number">Employee Number</label>
                                 </div>
                                 <button type="submit" className="btn btn-lg btn-primary">Submit</button>

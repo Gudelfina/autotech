@@ -10,8 +10,6 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "sales_project.settings")
 django.setup()
 from sales_rest.models import AutomobileVO
 
-# Import models from sales_rest, here.
-# from sales_rest.models import Something
 
 
 def get_vin():
@@ -21,7 +19,6 @@ def get_vin():
     for automobile in content["autos"]:
         AutomobileVO.objects.update_or_create(
             vin=automobile["vin"],
-            # import_href=automobile["href"],
         )
 
 def poll():
