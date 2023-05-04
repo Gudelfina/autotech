@@ -66,14 +66,6 @@ The inventory of the automobile sales management system is updated in real-time 
 
 The front-end and back-end of the automobile sales management system are designed to work together seamlessly, providing a comprehensive solution for managing and monitoring automobile inventory sales.
 
-# Services
-
-The following services (via POST request) should be executed in the following order, as they depend on each other.
-
-1. Manufacturers
-2. Vehicle Models
-3. Automobile Information
-
 # Manufacturers
 
 The Manufacturers service is responsible for managing the manufacturer information for the automobiles. It provides the ability to add, update, and delete manufacturers. It also provides the ability to view all manufacturers and view a specific manufacturer.
