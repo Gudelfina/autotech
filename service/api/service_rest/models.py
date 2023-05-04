@@ -7,6 +7,9 @@ class AutomobileVO(models.Model):
     vin = models.CharField(max_length=17, unique=True)
     import_href = models.CharField(max_length=200, unique=True)
 
+    def __str__(self):
+        return self.vin
+
 
 class Technician(models.Model):
     employee_name = models.CharField(max_length=200)
@@ -20,17 +23,12 @@ class Technician(models.Model):
 
 
 class Appointment(models.Model):
+    vin = models.CharField(max_length=17)
     owner_name = models.CharField(max_length=200)
     date = models.DateField()
     time = models.TimeField()
     reason = models.TextField(max_length=300)
     completed = models.BooleanField(default=False)
-
-    vin = models.ForeignKey(
-        AutomobileVO,
-        related_name="appointments",
-        on_delete=models.CASCADE
-    )
 
     technician = models.ForeignKey(
         Technician,

@@ -2,13 +2,12 @@
 
 Team:
 
-* Lupe Mendez - Services
-# NOTE : when creating an appointment, use a VIN that is already exisiting from the inventory microservice automobile section. It will not allow you to create your own unfortunately.
+- Lupe Mendez - Services
 
-
-* Noah Granard- Sales
+- Noah Granard- Sales
 
 # Start the Project
+
 1. Clone project from gitlab to your local machine (https://gitlab.com/Gudelfina3/project-beta)
 
 2. Navigate to the project-beta directory in your terminal
@@ -24,9 +23,24 @@ docker-compose up --build
 
 5. Open a browser and navigate to http://localhost:3000 to view the application
 
-# Design Priniciples
-![image](https://i.imgur.com/xegfiBK.jpg)
+# Disclaimer
 
+To fully interact with this application, please create AT LEAST ONE of the following in this order as there is an empty database:
+
+1. ![Manufacturer](http://localhost:3000/manufacturer/create)
+2. ![Vehicle Model](http://localhost:3000/vehicle-model/create)
+3. ![Automobile](http://localhost:3000/automobile/create)
+4. ![Sales Person](http://localhost:3000/sales-person/create)
+5. ![Sales Person](http://localhost:3000/sales-person/create)
+6. ![Customer](http://localhost:3000/customer/create)
+7. ![Sale Record](http://localhost:3000/sale-record/create)
+8. ![Appointment](http://localhost:3000/appointment/create)
+
+To be able to
+
+# Design Priniciples
+
+![image](https://i.imgur.com/xegfiBK.jpg)
 
 # Ports
 
@@ -37,6 +51,7 @@ docker-compose up --build
 # Service microservice
 
 The service microservice allows a user to create a technician and appointment for a customer. It also allows the user to be able to see the full list of appointments and filter through them by inputing an existing VIN. The user will also have the feature to cancel and complete an appointment when it is finished. In order for the service miscroservice to function, I needed to poll data from inventory microservice. For this we used a poller to pull the VIN data in order to incroporate into my own model as a value object. In my service models, I used the Technician and AutomobileVO as foreign keys for the Appointment model. NOTE: Creating an appointment also relies on creating a technician first as well. This allows for the appointment instances to be created with the complete data. In the front-end of the application, there are links to each form and lists, categorized by name: technician and appointment.
+
 # Sales microservice
 
 This automobile sales management system is a comprehensive, full-stack service that allows users to manage and monitor their inventory of automobiles. It offers a variety of features such as adding salespeople and customers, creating sales records, viewing sales history, and displaying sales history for specific salespeople. The app is built on a microservices architecture with an inventory microservice integrated to maintain data consistency. It also enables real-time updates on the inventory and prevents the sale of vehicles that aren't listed or have already been sold.
@@ -54,24 +69,31 @@ The front-end and back-end of the automobile sales management system are designe
 # Services
 
 The following services (via POST request) should be executed in the following order, as they depend on each other.
+
 1. Manufacturers
 2. Vehicle Models
 3. Automobile Information
 
 # Manufacturers
+
 The Manufacturers service is responsible for managing the manufacturer information for the automobiles. It provides the ability to add, update, and delete manufacturers. It also provides the ability to view all manufacturers and view a specific manufacturer.
 
 ## Manufacturers CRUD Documentation (API)
+
 <details>
 
 # Create a manufacturer
+
 POST request to http://localhost:8100/api/manufacturers/ with the following JSON body:
+
 ```
 {
     "name": "Toyota",
 }
 ```
+
 Returns
+
 ```
 {
     "href": "/api/manufacturers/1",
@@ -81,9 +103,11 @@ Returns
 ```
 
 ### List all manufacturers
+
 GET request to http://localhost:8100/api/manufacturers/ - no body required.
 
 Returns
+
 ```
 {
 	"href": "/api/manufacturers/1/",
@@ -91,10 +115,13 @@ Returns
 	"name": "Toyota"
 }
 ```
+
 ### Get a specific manufacturer
+
 GET request to http://localhost:8100/api/manufacturers/1/ - no body required. The number at the end of the URL is the ID of the manufacturer you want to retrieve.
 
 Returns
+
 ```
 {
     "href": "/api/manufacturers/1/",
@@ -102,7 +129,9 @@ Returns
     "name": "Toyota"
 }
 ```
+
 ### Update a manufacturer
+
 PUT request to http://localhost:8100/api/manufacturers/1/ with the following JSON body. The number at the end of the URL is the ID of the manufacturer you want to update:
 
 ```
@@ -112,6 +141,7 @@ PUT request to http://localhost:8100/api/manufacturers/1/ with the following JSO
 ```
 
 Returns
+
 ```
 {
     "href": "/api/manufacturers/1/",
@@ -121,25 +151,30 @@ Returns
 ```
 
 ### Delete a manufacturer
+
 DELETE request to http://localhost:8100/api/manufacturers/1/ - no body required. The number at the end of the URL is the ID of the manufacturer you want to delete.
 
 Returns
+
 ```
 {
 	"id": null,
 	"name": "Ford"
 }
 ```
+
 </details>
 
-
 # Vehicle Models
+
 The Vehicle Models service is responsible for managing the vehicle model information for the automobiles. It provides the ability to add, update, and delete vehicle models. It also provides the ability to view all vehicle models and view a specific vehicle model.
 
 ## Vehicle Models CRUD Documentation (API)
+
 <details>
 
 ### Create a vehicle model
+
 POST request to http://localhost:8100/api/models/ with the following JSON body:
 
 ```
@@ -151,6 +186,7 @@ POST request to http://localhost:8100/api/models/ with the following JSON body:
 ```
 
 Returns
+
 ```{
 	"href": "/api/models/1/",
 	"id": 1,
@@ -165,9 +201,11 @@ Returns
 ```
 
 ### List all vehicle models
+
 GET request to http://localhost:8100/api/models/ - no body required.
 
 Returns
+
 ```
 {
 	"models": [
@@ -187,9 +225,11 @@ Returns
 ```
 
 ### Get a specific vehicle model
+
 GET request to http://localhost:8100/api/models/1/ - no body required. The number at the end of the URL is the ID of the vehicle model you want to retrieve.
 
 Returns
+
 ```
 {
 	"href": "/api/models/1/",
@@ -205,6 +245,7 @@ Returns
 ```
 
 ### Update a vehicle model
+
 PUT request to http://localhost:8100/api/models/1/ with the following JSON body. The number at the end of the URL is the ID of the vehicle model you want to update:
 
 ```
@@ -216,6 +257,7 @@ PUT request to http://localhost:8100/api/models/1/ with the following JSON body.
 ```
 
 Returns
+
 ```
 {
     "href": "/api/models/1/",
@@ -231,9 +273,11 @@ Returns
 ```
 
 ### Delete a vehicle model
+
 DELETE request to http://localhost:8100/api/models/1/ - no body required. The number at the end of the URL is the ID of the vehicle model you want to delete.
 
 Returns
+
 ```
 {
 	"id": null,
@@ -246,15 +290,19 @@ Returns
 	}
 }
 ```
+
 </details>
 
 # Automobile Models
+
 The Automobile Models service is responsible for managing the automobile information for the automobiles. It provides the ability to add, update, and delete automobiles. It also provides the ability to view all automobiles and view a specific automobile.
 
 ## Automobile Models CRUD Documentation (API)
+
 <details>
 
 ### Create an Automobile model
+
 POST request to http://localhost:8100/api/automobiles/ with the following JSON body:
 
 ```
@@ -267,6 +315,7 @@ POST request to http://localhost:8100/api/automobiles/ with the following JSON b
 ```
 
 Returns
+
 ```
 {
     "href": "/api/automobiles/3C3CC5FB2AN120888/",
@@ -291,10 +340,11 @@ Returns
 ## NOTE - All VINs must be unique. If you try to create an automobile with a VIN that already exists, you will get an error. Additionally, the VIN can be up to 17 characters long.
 
 ### Get list of Automobiles
+
 GET request to http://localhost:8100/api/automobiles/ - no body required:
 
-
 Returns
+
 ```
 {
 	"autos": [
@@ -321,9 +371,11 @@ Returns
 ```
 
 ### Get specific Automobile model
+
 GET request to http://localhost:8100/api/automobiles/3C3CC5FB2AN120888/ - no body required. The string at the end of the URL is the VIN of the automobile you would like to get the details about.
 
 Returns
+
 ```
 {
 	"href": "/api/automobiles/3C3CC5FB2AN120888/",
@@ -346,6 +398,7 @@ Returns
 ```
 
 ### Update Automobile model
+
 PUT request to http://localhost:8100/api/automobiles/3C3CC5FB2AN120888/ with the following JSON body. The string at the end of the URL is the automobile's VIN:
 
 ```
@@ -356,6 +409,7 @@ PUT request to http://localhost:8100/api/automobiles/3C3CC5FB2AN120888/ with the
 ```
 
 Returns
+
 ```
 {
 	"href": "/api/automobiles/3C3CC5FB2AN120888/",
@@ -378,9 +432,11 @@ Returns
 ```
 
 ### Delete a specific Automobile model
+
 DELETE request to http://localhost:8100/api/automobiles/3C3CC5FB2AN120888/ - no body required. The string at the end is the automobile's VIN you would like to delete.
 
 Returns
+
 ```
 {
 	"href": "/api/automobiles/3C3CC5FB2AN120888/",
@@ -401,14 +457,17 @@ Returns
 	}
 }
 ```
+
 </details>
 
 # Service
 
 ## Service CRUD Documentation (API)
+
 <details>
 
 ### Create a Technician
+
 POST request from http://localhost:8080/api/technicians/ with the following JSON body:
 
 ```
@@ -419,6 +478,7 @@ POST request from http://localhost:8080/api/technicians/ with the following JSON
 ```
 
 Returns
+
 ```
 {
 	"href": "/api/technicians/1/",
@@ -428,9 +488,11 @@ Returns
 ```
 
 ### Get Technician list
+
 GET request to http://localhost:8080/api/technicians/ - no JSON body required:
 
 Returns
+
 ```
 {
     "technicians": [
@@ -444,9 +506,11 @@ Returns
 ```
 
 ### Get specific Technician
+
 GET request to http://localhost:8080/api/technicians/1/ - the number at the end is the ID of technician. No JSON body required:
 
 Returns
+
 ```
 {
 	"href": "/api/technicians/1/",
@@ -456,9 +520,11 @@ Returns
 ```
 
 ### Delete specific Technician
+
 DELETE request to http://localhost:8080/api/technicians/1/ - the number at the end is the ID of technician. No JSON body required:
 
 Returns
+
 ```
 * first send
 
@@ -472,8 +538,11 @@ Returns
 	"deleted": false
 }
 ```
+
 ## Appointment CRUD Documentation (API)
+
 ### Create Appointment
+
 POST request to http://localhost:8080/api/appointments/ with the JSON body:
 
 ```
@@ -488,6 +557,7 @@ POST request to http://localhost:8080/api/appointments/ with the JSON body:
 ```
 
 Returns
+
 ```
 {
 	"href": "/api/appointments/1/",
@@ -508,9 +578,11 @@ Returns
 ```
 
 ### List Appointments
+
 GET request to http://localhost:8080/api/appointments/ - no JSON body required:
 
 Returns
+
 ```
 {
 "appointments": [
@@ -534,10 +606,13 @@ Returns
     ]
 }
 ```
+
 ### Get specific Appointment
+
 GET request from http://localhost:8080/api/appointments/1/ - the number at the end is the ID of the appointment. No JSON body required.
 
 Returns
+
 ```
 {
 	"owner_name": "Sam",
@@ -559,6 +634,7 @@ Returns
 ```
 
 ### Update specific Appointment
+
 PUT request to http://localhost:8080/api/appointments/1/ - the number at the end is the ID of the appointment. The following JSON body is:
 
 ```
@@ -568,6 +644,7 @@ PUT request to http://localhost:8080/api/appointments/1/ - the number at the end
 ```
 
 Returns
+
 ```
 {
 	"owner_name": "Sam",
@@ -589,9 +666,11 @@ Returns
 ```
 
 ### Delete a specific Appointment
+
 DELETE request to http://localhost:8080/api/appointments/1/ - the number at the is the ID of the appointment. No JSON body required.
 
 Returns
+
 ```
 * first send
 
@@ -605,14 +684,17 @@ Returns
 	"deleted": false
 }
 ```
+
 </details>
 
 # Sales
 
 ## Sales Person CRUD Documentation (API)
+
 <details>
 
 # Create Sales Person
+
 POST request to http://localhost:8090/api/sales-person/ with the following JSON body:
 
 ```
@@ -623,6 +705,7 @@ POST request to http://localhost:8090/api/sales-person/ with the following JSON 
 ```
 
 Returns
+
 ```
 {
     "name": "Dan",
@@ -632,9 +715,11 @@ Returns
 ```
 
 ### Get list of Sales Persons
+
 GET request to http://localhost:8090/api/sales-person/ - no body required:
 
 Returns
+
 ```
 {
 	"sales_person": [
@@ -650,6 +735,7 @@ Returns
 ## Customer CRUD Documentation (API)
 
 ### Create Customer
+
 POST request to http://localhost:8090/api/customer/ with the following JSON body:
 
 ```
@@ -661,6 +747,7 @@ POST request to http://localhost:8090/api/customer/ with the following JSON body
 ```
 
 Returns
+
 ```
 {
     "name": "John",
@@ -671,9 +758,11 @@ Returns
 ```
 
 ### Get list of Customers
+
 GET request to http://localhost:8090/api/customer/ - no body required:
 
 Returns
+
 ```
 {
     "customer": [
@@ -690,6 +779,7 @@ Returns
 ## Sale Record CRUD Documentation (API)
 
 ### Create Sale Record
+
 POST request to http://localhost:8090/api/sale-record/ with the following JSON body:
 
 ```
@@ -702,6 +792,7 @@ POST request to http://localhost:8090/api/sale-record/ with the following JSON b
 ```
 
 Returns
+
 ```
 {
 	"sale_record": {
@@ -723,4 +814,5 @@ Returns
 	}
 }
 ```
+
 </details>

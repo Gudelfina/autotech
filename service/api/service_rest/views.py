@@ -12,17 +12,12 @@ class AutomobileVODetailEncoder(ModelEncoder):
     properties = ["vin", "import_href"]
 
 
-class TechnicianListEncoder(ModelEncoder):
+class TechnicianEncoder(ModelEncoder):
     model = Technician
     properties = ["employee_name", "employee_id"]
 
 
-class TechnicianDetailEncoder(ModelEncoder):
-    model = Technician
-    properties = ["employee_name", "employee_id"]
-
-
-class AppointmentListEncoder(ModelEncoder):
+class AppointmentEncoder(ModelEncoder):
     model = Appointment
     properties = [
         "owner_name",
@@ -35,27 +30,13 @@ class AppointmentListEncoder(ModelEncoder):
         "technician"
     ]
     encoders = {
-        "vin": AutomobileVODetailEncoder(),
-        "technician": TechnicianDetailEncoder()
+        "technician": TechnicianEncoder()
     }
 
+    def get_extra_data(self, o):
+        count = AutomobileVO.objects.filter(vin=o.vin).count()
+        return {"vip_treatment": count > 0}
 
-class AppointmentDetailEncoder(ModelEncoder):
-    model = Appointment
-    properties = [
-        "owner_name",
-        "date",
-        "time",
-        "reason",
-        "id",
-        "completed",
-        "vin",
-        "technician",
-    ]
-    encoders = {
-        "vin": AutomobileVODetailEncoder(),
-        "technician": TechnicianDetailEncoder()
-    }
 
 
 @require_http_methods(["GET", "POST"])
@@ -67,7 +48,7 @@ def api_technician_list(request, technician_id=None):
             technicians = Technician.objects.all()
         return JsonResponse(
             {"technicians": technicians},
-            encoder=TechnicianListEncoder,
+            encoder=TechnicianEncoder,
         )
     else:
         try:
@@ -75,14 +56,14 @@ def api_technician_list(request, technician_id=None):
             technician = Technician.objects.create(**content)
             return JsonResponse(
                 technician,
-                encoder=TechnicianDetailEncoder,
+                encoder=TechnicianEncoder,
                 safe=False,
             )
         except Technician.DoesNotExist:
             response = JsonResponse(
                 {"message": "technician not created"}
             )
-            response.status_code
+            response.status_code = 400
             return response
 
 
@@ -92,7 +73,7 @@ def api_show_techincian(request, id):
         technician = Technician.objects.get(id=id)
         return JsonResponse(
             technician,
-            encoder=TechnicianDetailEncoder,
+            encoder=TechnicianEncoder,
             safe=False,
         )
     else:
@@ -107,29 +88,32 @@ def api_appointment_list(request):
         appointments = Appointment.objects.all()
         return JsonResponse(
             {"appointments": appointments},
-            encoder=AppointmentListEncoder,
+            encoder=AppointmentEncoder,
         )
     else:
-        try:
-            content = json.loads(request.body)
-            vin = AutomobileVO.objects.get(vin=content["vin"])
-            content["vin"] = vin
-
+        # try:
+        content = json.loads(request.body)
+        print("COOOOOTEN", content)
+        vin = content["vin"]
+        automobiles = Appointment.objects.filter(vin=vin)
+        if automobiles.exists():
+            automobile = automobiles.first()
+            content["vin"] = automobile
+        else:
             technician = Technician.objects.get(employee_id=content["technician"])
             content["technician"] = technician
-
             appointment = Appointment.objects.create(**content)
             return JsonResponse(
                 appointment,
-                encoder=AppointmentDetailEncoder,
+                encoder=AppointmentEncoder,
                 safe=False,
-            )
-        except:
-            response = JsonResponse(
-                {"message": "appointment not created"}
-            )
-            response.status_code
-            return response
+                )
+        # except:
+        #     response = JsonResponse(
+        #         {"message": "appointment not created"}
+        #     )
+        #     response.status_code = 400
+        #     return response
 
 
 @require_http_methods(["DELETE", "GET", "PUT"])
@@ -138,7 +122,7 @@ def api_show_appointment(request, id):
         appointment = Appointment.objects.get(id=id)
         return JsonResponse(
             appointment,
-            encoder=AppointmentDetailEncoder,
+            encoder=AppointmentEncoder(),
             safe=False,
         )
     elif request.method == "PUT":
@@ -158,7 +142,7 @@ def api_show_appointment(request, id):
         appointment = Appointment.objects.get(id=id)
         return JsonResponse(
             appointment,
-            encoder=AppointmentDetailEncoder,
+            encoder=AppointmentEncoder(),
             safe=False,
         )
     else:
