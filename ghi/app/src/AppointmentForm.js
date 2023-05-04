@@ -62,7 +62,7 @@ function AppointmentForm() {
   };
 
   const handleVin = (event) => {
-    const value = event.target.value;
+    const value = event.target.value.toUpperCase();
     setVin(value);
   };
 

@@ -54,7 +54,7 @@ function AutomobileForm() {
   };
 
   const handleChangeVin = (event) => {
-    const value = event.target.value;
+    const value = event.target.value.toUpperCase();
     setVin(value);
   };
 
