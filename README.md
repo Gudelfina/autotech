@@ -27,14 +27,14 @@ docker-compose up --build
 
 To fully interact with this application, please create AT LEAST ONE of the following in this order as there is an empty database:
 
-1. ![Manufacturer](http://localhost:3000/manufacturer/create)
-2. ![Vehicle Model](http://localhost:3000/vehicle-model/create)
-3. ![Automobile](http://localhost:3000/automobile/create)
-4. ![Sales Person](http://localhost:3000/sales-person/create)
-5. ![Sales Person](http://localhost:3000/sales-person/create)
-6. ![Customer](http://localhost:3000/customer/create)
-7. ![Sale Record](http://localhost:3000/sale-record/create)
-8. ![Appointment](http://localhost:3000/appointment/create)
+1. <a href="http://localhost:3000/manufacturer/create">Manufacturer</a>
+2. <a href="http://localhost:3000/vehicle-model/create">Vehicle Model</a>
+3. <a href="http://localhost:3000/automobile/create">Automobile</a>
+4. <a href="http://localhost:3000/sales-person/create">Sales Person</a>
+5. <a href="http://localhost:3000/sales-person/create">Sales Person</a>
+6. <a href="http://localhost:3000/customer/create">Customer</a>
+7. <a href="http://localhost:3000/sale-record/create">Sale Record</a>
+8. <a href="http://localhost:3000/appointment/create">Appointment</a>
 
 To be able to
 
