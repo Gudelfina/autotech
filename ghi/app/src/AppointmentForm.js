@@ -111,7 +111,6 @@ function AppointmentForm() {
                 value={vin}
                 placeholder="VIN"
                 required
-                onkeyup="this.value = this.value.toUpperCase()"
                 type="text"
                 maxLength="17"
                 name="vin"
